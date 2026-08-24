@@ -64,28 +64,6 @@ Exposed a Regional **Amazon API Gateway REST API** (`genai-serverless-api`) util
 
 ## Architecture Diagram
 
-```text
-[ Client / Terminal / Postman ]
-               │
-               ▼ (HTTPS POST /generate)
-    [ Amazon API Gateway ]
-       (genai-serverless-api)
-               │
-               ▼ (Lambda Proxy Integration)
-       [ AWS Lambda ]
- (genai-bedrock-api-handler)
-   • Python 3.12 (arm64)
-   • 256 MB RAM / 30s Timeout
-               │
-               ├──► [ IAM Role: LambdaBedrockAPIRole ]
-               │      (Least-Privilege bedrock:InvokeModel)
-               │
-               ├──► [ Amazon Bedrock Runtime ]
-               │      (amazon.nova-micro-v1:0)
-               │
-               └──► [ Amazon CloudWatch Logs ]
-                      (/aws/lambda/genai-bedrock-api-handler)
-```
 
 ---
 
@@ -356,17 +334,28 @@ curl -X POST https://9rhea5lkqf.execute-api.us-east-1.amazonaws.com/dev/generate
 
 Displays the `LambdaBedrockAPIRole` (`arn:aws:iam::418272769771:role/LambdaBedrockAPIRole`) successfully provisioned in the AWS IAM Console with the attached customer-managed policy `BedrockInvokeLeastPrivilegePolicy`.
 
+<img width="1916" height="906" alt="Screenshot 1" src="https://github.com/user-attachments/assets/4c3fe845-51ec-4494-adbf-5dac63b661dd" />
+
+
 ### 2. AWS Lambda Function Configuration (`genai-bedrock-api-handler`)
 
 Shows the AWS Lambda configuration interface verifying that memory is tuned to 256 MB, ephemeral storage to 512 MB, and execution timeout to 30 seconds for the `genai-bedrock-api-handler` function.
+
+<img width="1919" height="720" alt="Screenshot 2" src="https://github.com/user-attachments/assets/053e7d59-39f9-409f-a1fe-ad09bfddf79c" />
+
 
 ### 3. AWS Lambda Test Execution & Token Telemetry Output
 
 Displays the successful execution of the test event inside the AWS Lambda console. The response returns HTTP `200 OK` along with the JSON payload containing the Bedrock Nova Micro response and token telemetry (`input_tokens: 9`, `output_tokens: 46`, `total_tokens: 55`).
 
+<img width="1599" height="678" alt="Screenshot 3" src="https://github.com/user-attachments/assets/8ac402b3-4607-4f0a-bc9f-ab897f72048e" />
+
+
 ### 4. End-to-End Live API Gateway `cURL` Verification
 
 Captures a live terminal executing a `cURL` POST request against the deployed Amazon API Gateway endpoint (`https://9rhea5lkqf.execute-api.us-east-1.amazonaws.com/dev/generate`). The API returns a `200 OK` response with generated LLM text and token metrics in real time.
+
+<img width="1447" height="545" alt="Screenshot 4" src="https://github.com/user-attachments/assets/563cf275-bcd0-43d4-a4e0-223383d48966" />
 
 ---
 
