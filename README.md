@@ -63,6 +63,7 @@ Exposed a Regional **Amazon API Gateway REST API** (`genai-serverless-api`) util
 ---
 
 ## Architecture Diagram
+<img width="1169" height="827" alt="Architecture Diagram" src="https://github.com/user-attachments/assets/b08b3e44-0588-409e-ba08-71f62254c4b7" />
 
 
 ---
