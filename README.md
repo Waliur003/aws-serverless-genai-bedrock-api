@@ -188,8 +188,7 @@ terraform-aws-bedrock-api/
 ├── apigateway.tf          # REST API Gateway, /generate resource, POST proxy method, and dev stage
 ├── cloudwatch.tf          # CloudWatch log group definition with 14-day retention rule
 ├── outputs.tf             # Exported API Gateway Invoke URL and Lambda Function ARN
-└── src/
-    └── lambda_function.py # Python 3.12 Bedrock Converse handler
+
 ```
 
 ---
