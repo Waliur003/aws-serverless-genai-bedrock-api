@@ -64,28 +64,6 @@ Exposed a Regional **Amazon API Gateway REST API** (`genai-serverless-api`) util
 
 ## Architecture Diagram
 
-```text
-[ Client / Terminal / Postman ]
-               │
-               ▼ (HTTPS POST /generate)
-    [ Amazon API Gateway ]
-       (genai-serverless-api)
-               │
-               ▼ (Lambda Proxy Integration)
-       [ AWS Lambda ]
- (genai-bedrock-api-handler)
-   • Python 3.12 (arm64)
-   • 256 MB RAM / 30s Timeout
-               │
-               ├──► [ IAM Role: LambdaBedrockAPIRole ]
-               │      (Least-Privilege bedrock:InvokeModel)
-               │
-               ├──► [ Amazon Bedrock Runtime ]
-               │      (amazon.nova-micro-v1:0)
-               │
-               └──► [ Amazon CloudWatch Logs ]
-                      (/aws/lambda/genai-bedrock-api-handler)
-```
 
 ---
 
